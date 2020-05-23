@@ -26,5 +26,7 @@ class Bootcamp {
     } else {
       console.log('Failure: student is already registered');
     }
+
+    return this.students;
   }
 }
