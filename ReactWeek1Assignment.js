@@ -14,13 +14,17 @@ class Bootcamp {
   }
 
   registerStudent(student) {
+    console.log(`attempting to register student ${student.email} to the bootcamp ${this.name}...`);
     // check if this student already exists
     if (
       this.students.filter(
         elem => (elem.email == student.email)
       ).length === 0
     ) {
-      this.students.push(student)
+      console.log('Success');
+      this.students.push(student);
+    } else {
+      console.log('Failure: student is already registered');
     }
   }
 }
