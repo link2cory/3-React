@@ -21,11 +21,38 @@ class CampsiteInfo extends Component {
     )
   }
 
+  formatDate(date) {
+    return new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(date)))
+  }
+
+  renderComments(comments) {
+    if (comments) {
+      return (
+        <div className="col-md-5 m-1">
+          <h4>Comments</h4>
+          {
+            comments.map(comment => {
+              return (
+                <div>
+                  <p>{comment.text}</p>              
+                  <p>-- {comment.author}, {this.formatDate(comment.date)}</p>              
+                </div>
+              )}
+            )
+          }
+        </div>
+      )
+    } else {
+      return <div />
+    }
+  }
+
   render() {
     return this.props.campsite ?
       (
         <div className="row">
           {this.renderCampsite(this.props.campsite)}
+          {this.renderComments(this.props.campsite.comments)}
         </div>
       )
       : <div />;
