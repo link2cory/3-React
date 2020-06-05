@@ -4,8 +4,8 @@ import Footer from "./FooterComponent";
 import Home from "./HomeComponent";
 import Contact from "./ContactComponent";
 import Directory from "./DirectoryComponent";
+import CampsiteInfo from "./CampsiteInfoComponent";
 import { Switch, Route, Redirect } from "react-router-dom";
-
 import { CAMPSITES } from "../shared/campsites";
 import { COMMENTS } from "../shared/comments";
 import { PARTNERS } from "../shared/partners";
@@ -23,6 +23,16 @@ class Main extends Component {
   }
 
   render() {
+    const CampsiteWithId = ({ match }) => {
+      const campsite = this.state.campsites.filter(
+        (campsite) => campsite.id === +match.params.campsiteId
+      )[0];
+      const comments = this.state.comments.filter(
+        (comment) => comment.campsiteId === +match.params.campsiteId
+      );
+      return <CampsiteInfo campsite={campsite} comments={comments} />;
+    };
+
     const HomePage = () => {
       return (
         <Home
@@ -46,6 +56,7 @@ class Main extends Component {
             path="/directory"
             render={() => <Directory campsites={this.state.campsites} />}
           />
+          <Route path="/directory/:campsiteId" component={CampsiteWithId} />
           <Route exact path="/contactus" component={Contact} />
           <Redirect to="/home" />
         </Switch>
