@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap'
+import React, { Component } from "react";
+import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
 
 class CampsiteInfo extends Component {
   constructor(props) {
@@ -18,11 +18,15 @@ class CampsiteInfo extends Component {
           </CardBody>
         </Card>
       </div>
-    )
+    );
   }
 
   formatDate(date) {
-    return new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(date)))
+    return new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "2-digit",
+    }).format(new Date(Date.parse(date)));
   }
 
   renderComments(comments) {
@@ -30,32 +34,34 @@ class CampsiteInfo extends Component {
       return (
         <div className="col-md-5 m-1">
           <h4>Comments</h4>
-          {
-            comments.map(comment => {
-              return (
-                <div>
-                  <p>{comment.text}</p>              
-                  <p>-- {comment.author}, {this.formatDate(comment.date)}</p>              
-                </div>
-              )}
-            )
-          }
+          {comments.map((comment) => {
+            return (
+              <div>
+                <p>{comment.text}</p>
+                <p>
+                  -- {comment.author}, {this.formatDate(comment.date)}
+                </p>
+              </div>
+            );
+          })}
         </div>
-      )
+      );
     } else {
-      return <div />
+      return <div />;
     }
   }
 
   render() {
-    return this.props.campsite ?
-      (
+    return this.props.campsite ? (
+      <div className="container">
         <div className="row">
           {this.renderCampsite(this.props.campsite)}
           {this.renderComments(this.props.campsite.comments)}
         </div>
-      )
-      : <div />;
+      </div>
+    ) : (
+      <div />
+    );
   }
 }
 
