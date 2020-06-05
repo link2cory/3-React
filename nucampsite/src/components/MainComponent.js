@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Directory from "./DirectoryComponent";
 import { CAMPSITES } from "../shared/campsites";
 import Header from "./HeaderComponent";
+import Footer from "./FooterComponent";
 import CampsiteInfo from "./CampsiteInfoComponent";
 
 class Main extends Component {
@@ -32,6 +33,7 @@ class Main extends Component {
             )[0]
           }
         />
+        <Footer />
       </div>
     );
   }
